@@ -4,7 +4,7 @@ playGame();
 
 // Function for playing a full 5-round game
 function playGame() {
-    // Initalize humanScore, computerScore, and roundCount
+    // Initialize humanScore, computerScore, and roundCount
     let humanScore = 0;
     let computerScore = 0;
     let roundCount = (humanScore + computerScore);
