@@ -1,16 +1,38 @@
-// Initialize variables for human and computer scores
-let humanScore = 0;
-let computerScore = 0;
-// Create the computer's choice
-const computerSelection = getComputerChoice();
-const humanSelection = getHumanChoice();
-console.log(computerSelection);
-playRound(humanSelection, computerSelection);
-console.log(playRound());
-changeScore();
-console.log("You: " + humanScore);
-console.log("Computer: " + computerScore);
+console.log("Rock, Paper, Scissors. Best 3 out of 5.")
+// Play 5-round game
+playGame();
 
+// Function for playing a full 5-round game
+function playGame() {
+    // Initalize humanScore, computerScore, and roundCount
+    let humanScore = 0;
+    let computerScore = 0;
+    let roundCount = (humanScore + computerScore);
+    // Loop all functions for a single round until the round count reaches 5
+    do {
+        const computerSelection = getComputerChoice();
+        const humanSelection = getHumanChoice();
+        playRound(humanSelection, computerSelection);
+        let roundResult = playRound(humanSelection, computerSelection);
+        console.log(roundResult);
+        changeScore(roundResult, humanSelection, computerSelection);
+        let scoreAdjustment = changeScore(roundResult, humanSelection, computerSelection);
+        if (scoreAdjustment === "win") {
+            humanScore = humanScore + 1;
+            roundCount = roundCount + 1;
+        } else if (scoreAdjustment === "lose") {
+            computerScore = computerScore + 1;
+            roundCount = roundCount + 1;
+        }
+        console.log("You: " + humanScore);
+        console.log("Computer: " + computerScore);
+    } while (roundCount < 5);
+    if (humanScore > computerScore) {
+        console.log("Congratulations! You won! Your score: " + humanScore + " Computer score: " + computerScore);
+    } else {
+        console.log("You lose! Bummer.. Your score: " + humanScore + " Computer score: " + computerScore);
+    }
+}
 
 // Function that determines computer choice
 function getComputerChoice() {
@@ -41,7 +63,7 @@ function getHumanChoice() {
 }
 
 // Function that determines the winner of the round and updates the score.
-function playRound(humanChoice, computerChoice) {
+function playRound(humanSelection, computerSelection) {
         if ((humanSelection === "Rock" && computerSelection === "Scissors")
             ||(humanSelection === "Paper" && computerSelection === "Rock")
             ||(humanSelection === "Scissors" && computerSelection === "Paper")) {
@@ -52,18 +74,20 @@ function playRound(humanChoice, computerChoice) {
                 return ("You lose! " + computerSelection + " beats " + humanSelection + ".");  
         } else if (humanSelection === "Undefined") {
                 return ("Please choose an option.");            
-        } else if (humanChoice === computerChoice) {
+        } else if (humanSelection === computerSelection) {
                 return ("You both chose " + humanSelection + ". Try Again!");
         } else {
             return "Your choice is invalid. Try again.";
         }
 }
 
-function changeScore() {
-    if (playRound() === ("You win! " + humanSelection + " beats " + computerSelection + ".")) {
-        return humanScore += 1;
-    } else if (playRound() === ("You lose! " + computerSelection + " beats " + humanSelection + ".")) {
-        return computerScore += 1;
+function changeScore(roundResult, humanSelection, computerSelection) {
+    if (roundResult === ("You win! " + humanSelection + " beats " + computerSelection + ".")) {
+        return "win";
+    } else if (roundResult === ("You lose! " + computerSelection + " beats " + humanSelection + ".")) {
+        return "lose";
+    } else {
+        return "no change";
     }
 }
 
