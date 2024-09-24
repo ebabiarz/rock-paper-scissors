@@ -1,38 +1,43 @@
-console.log("Rock, Paper, Scissors. Best 3 out of 5.")
-// Play 5-round game
-playGame();
+const humanScoreTracker = document.querySelector("#Your-Score");
+const computerScoreTracker = document.querySelector("#Computer-Score");
+const finalResult = document.querySelector("#Final-Result");
+const result = document.querySelector("#Result");
+const buttons = document.querySelectorAll("button");
 
-// Function for playing a full 5-round game
-function playGame() {
-    // Initialize humanScore, computerScore, and roundCount
-    let humanScore = 0;
-    let computerScore = 0;
-    let roundCount = (humanScore + computerScore);
-    // Loop all functions for a single round until the round count reaches 5
-    do {
-        const computerSelection = getComputerChoice();
-        const humanSelection = getHumanChoice();
-        playRound(humanSelection, computerSelection);
-        let roundResult = playRound(humanSelection, computerSelection);
-        console.log(roundResult);
-        changeScore(roundResult, humanSelection, computerSelection);
-        let scoreAdjustment = changeScore(roundResult, humanSelection, computerSelection);
-        if (scoreAdjustment === "win") {
-            humanScore = humanScore + 1;
-            roundCount = roundCount + 1;
-        } else if (scoreAdjustment === "lose") {
-            computerScore = computerScore + 1;
-            roundCount = roundCount + 1;
-        }
-        console.log("You: " + humanScore);
-        console.log("Computer: " + computerScore);
-    } while (roundCount < 5);
-    if (humanScore > computerScore) {
-        console.log("Congratulations! You won! Your score: " + humanScore + " Computer score: " + computerScore);
-    } else {
-        console.log("You lose! Bummer.. Your score: " + humanScore + " Computer score: " + computerScore);
-    }
-}
+let humanScore = 0;
+let computerScore = 0;
+
+buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+
+        if (humanScore < 5 && computerScore < 5) {
+            const computerSelection = getComputerChoice();
+            const humanSelection = button.id;
+
+            playRound(humanSelection, computerSelection);
+            let roundResult = playRound(humanSelection, computerSelection);
+            changeScore(roundResult, humanSelection, computerSelection);
+            let scoreAdjustment = changeScore(roundResult, humanSelection, computerSelection);
+
+            if (scoreAdjustment === "win") {
+                humanScore = humanScore +1;
+            } else if (scoreAdjustment === "lose") {
+                computerScore = computerScore + 1;
+            };
+        result.textContent = roundResult;
+        humanScoreTracker.textContent = "Your Score: " + humanScore;
+        computerScoreTracker.textContent = "Computer Score: " + computerScore;
+        };
+
+        if (humanScore === 5) {
+            finalResult.textContent = "You Win! Congratulations!";
+        } else if (computerScore === 5) {
+            finalResult.textContent = "You Lose! Bummer...";
+        };
+    });
+});
+
+
 
 // Function that determines computer choice
 function getComputerChoice() {
@@ -43,22 +48,6 @@ function getComputerChoice() {
         return "Paper";
     } else {
         return "Scissors";
-    }
-}
-
-// Function that takes user choice
-function getHumanChoice() {
-    let userChoice = prompt("Rock, Paper, or Scissors?");
-    if (userChoice.toLowerCase() === "rock") {
-        return "Rock";
-    } else if (userChoice.toLowerCase() === "paper") {
-        return "Paper";
-    } else if (userChoice.toLowerCase() === "scissors") {
-        return "Scissors";
-    } else if (userChoice === "") {
-        return "Undefined";
-    } else {
-        return "Invalid Choice";
     }
 }
 
@@ -90,14 +79,3 @@ function changeScore(roundResult, humanSelection, computerSelection) {
         return "no change";
     }
 }
-
-
-
-/*
-Set humanChoice variable to returned value of function humanChoicePrompt()
-Set computerChoice variable to returned value of function getRandomInt()
-Use if, else statement to determine the winner
-    Use OR (||) and AND (&&) to shorten code
-Log result message to console
-Add 1 to humanScore or computerScore based on the results
-*/
