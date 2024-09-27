@@ -18,6 +18,7 @@ buttons.forEach((button) => {
             let roundResult = playRound(humanSelection, computerSelection);
             changeScore(roundResult, humanSelection, computerSelection);
             let scoreAdjustment = changeScore(roundResult, humanSelection, computerSelection);
+            // result.classList.add("Result");
 
             if (scoreAdjustment === "win") {
                 humanScore = humanScore +1;
@@ -34,10 +35,36 @@ buttons.forEach((button) => {
         } else if (computerScore === 5) {
             finalResult.textContent = "You Lose! Bummer...";
         };
+
+        if (humanScore === 5 || computerScore === 5) {
+            const test = document.querySelector(".Restart");
+            if (test === null) {
+                restart();
+            };
+        };
     });
 });
 
 
+
+// Function that resets the page
+function restart() {
+    
+    const restart = document.createElement("button");
+    const div = document.querySelector("#Result-Section");
+    restart.classList.add("Restart");
+    restart.textContent = "Restart";
+    div.appendChild(restart);
+    restart.addEventListener("click", () => {
+        humanScore = 0;
+        humanScoreTracker.textContent = "";
+        computerScore = 0;
+        computerScoreTracker.textContent = "";
+        result.textContent = "";
+        finalResult.textContent = "";
+        restart.remove(restart);
+    })
+}
 
 // Function that determines computer choice
 function getComputerChoice() {

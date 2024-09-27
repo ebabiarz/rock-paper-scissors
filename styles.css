@@ -1,0 +1,62 @@
+body {
+    font-family: Tahoma, Verdana, sans-serif;
+    background-color: rgba(168, 167, 135, 0.596);
+    color: rgb(67, 51, 29);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex: auto;
+}
+
+p {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#Result {
+    font-size: 32px;
+    font-weight: bold;
+    
+    padding: 10px;
+}
+
+#Choice-Buttons {
+    display: flex;
+}
+
+button {
+    font-size: 24px;
+    color: rgb(180, 210, 230);
+    background-color: rgb(44, 80, 134);
+    outline-color: rgb(35, 26, 14);
+    border-color: rgb(35, 26, 14);
+    border-radius: 7px;
+    font-family: Tahoma, Verdana, sans-serif;
+    outline-color: transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 5px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#Result-Section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-top: 75px;
+}
+
+.Restart {
+    display: flex;
+    align-content: center;
+    justify-content: flex-start;
+    max-width: 100px;
+}
